@@ -23,5 +23,5 @@ REST API for an online store based on Django and Django REST Framework.
 ### 1. Cloning
 
 ```bash
-git clone <url-твоего-репозитория>
+git clone <https://github.com/arseglaz/ecommerce-api-django.git>
 cd ecommerce_api_project
