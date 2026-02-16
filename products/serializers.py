@@ -1,6 +1,6 @@
 from rest_framework import serializers
-from .models import Category, Product
-
+from .models import Category, Product, Review
+from django.contrib.auth.models import User
 
 class CategorySerializer(serializers.ModelSerializer):
     products_count = serializers.SerializerMethodField()
@@ -40,3 +40,13 @@ class ProductDetailSerializer(serializers.ModelSerializer):
             'created_at', 'updated_at'
         ]
         read_only_fields = ['slug', 'created_at', 'updated_at', 'is_in_stock']
+
+
+class ReviewSerializer(serializers.ModelSerializer):
+    user = serializers.StringRelatedField(read_only=True)
+    product = serializers.StringRelatedField(read_only=True)
+    
+    class Meta:
+        model = Review
+        fields = ['id', 'user', 'product', 'rating', 'comment', 'created_at', 'updated_at']
+        read_only_fields = ['created_at', 'updated_at']
