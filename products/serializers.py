@@ -44,9 +44,18 @@ class ProductDetailSerializer(serializers.ModelSerializer):
 
 class ReviewSerializer(serializers.ModelSerializer):
     user = serializers.StringRelatedField(read_only=True)
+    product_slug = serializers.SlugRelatedField(
+        slug_field='slug',
+        queryset=Product.objects.all(),
+        source='product',
+        write_only=True
+    )
     product = serializers.StringRelatedField(read_only=True)
-    
+
     class Meta:
         model = Review
-        fields = ['id', 'user', 'product', 'rating', 'comment', 'created_at', 'updated_at']
+        fields = [
+            'id', 'user', 'product', 'product_slug',
+            'rating', 'comment', 'created_at', 'updated_at'
+        ]
         read_only_fields = ['created_at', 'updated_at']
