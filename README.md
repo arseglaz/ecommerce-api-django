@@ -18,7 +18,7 @@ Backend-only training project for an online store on Django + DRF.
 - SimpleJWT
 - pytest + pytest-django
 
-## API endpoints (основные)
+## API endpoints
 
 ### Auth
 - `POST /api/auth/register/`

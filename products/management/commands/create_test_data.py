@@ -2,6 +2,7 @@ from django.core.management.base import BaseCommand
 from django.contrib.auth.models import User
 from products.models import Category, Product, Review
 from cart.models import Cart, CartItem
+from orders.models import Order, OrderItem
 from decimal import Decimal
 
 
@@ -181,6 +182,25 @@ class Command(BaseCommand):
             defaults={'quantity': 1}
         )
         self._log(created, 'cart item', f'1x MacBook')
+                # Create sample order for john
+        john_cart = Cart.objects.get(user=john)
+        if john_cart.items.exists():
+            try:
+                # Create order from john's cart
+                order = Order.objects.create(
+                    user=john,
+                    total_price=john_cart.total_price,
+                )
+                for item in john_cart.items.all():
+                    OrderItem.objects.create(
+                        order=order,
+                        product=item.product,
+                        quantity=item.quantity,
+                        price=item.product.price,
+                    )
+                self.stdout.write(f'✓ Created sample order for john (#{order.id})')
+            except Exception as e:
+                self.stdout.write(f'→ Skipping order creation: {str(e)}')
 
         self.stdout.write(self.style.SUCCESS('\n✅ Test data created/verified!'))
         self.stdout.write('\nLogin credentials:')
