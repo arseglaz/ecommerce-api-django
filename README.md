@@ -26,5 +26,3 @@ cd ecommerce_api_project
 python -m venv venv
 venv\Scripts\activate  # Windows
 pip install -r requirements.txt
-
-Translated with DeepL.com (free version)
