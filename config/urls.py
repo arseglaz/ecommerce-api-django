@@ -14,6 +14,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('products.urls')),
     path('api/', include('cart.urls')),
+    path('api/', include('orders.urls')),
     path('api/auth/', include('users.urls')),
     # TODO: DRF Browsable API logout broken on Django 5.x (GET → 405)
     # Fix later or use Postman/VS Code REST Client for JWT testing
