@@ -18,12 +18,11 @@ class CategoryViewSet(viewsets.ModelViewSet):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
     lookup_field = 'slug'
-    permission_classes = [IsAdminOrReadOnly]  # ← Изменили
-
+    permission_classes = [IsAdminOrReadOnly]  
 
 class ProductViewSet(viewsets.ModelViewSet):
     queryset = Product.objects.filter(is_active=True)
-    permission_classes = [IsAdminOrReadOnly]  # ← Изменили
+    permission_classes = [IsAdminOrReadOnly]  
     lookup_field = 'slug'
     filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
     filterset_fields = ['category', 'is_active']
@@ -47,7 +46,7 @@ class ProductViewSet(viewsets.ModelViewSet):
 class ReviewViewSet(viewsets.ModelViewSet):
     queryset = Review.objects.all()
     serializer_class = ReviewSerializer
-    permission_classes = [IsOwnerOrReadOnly]  # ← Читают все, пишет владелец
+    permission_classes = [IsOwnerOrReadOnly]  
     filter_backends = [DjangoFilterBackend, filters.OrderingFilter]
     filterset_fields = ['product', 'rating']
     ordering_fields = ['created_at', 'rating']
